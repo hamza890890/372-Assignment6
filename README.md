@@ -8,7 +8,7 @@
 
 ---
 
-## 📘 Description
+## Description
 This project is a simple web page that displays the latest 20 public repositories for any GitHub user.  
 It uses the **GitHub REST API** and the **Fetch API** in JavaScript to retrieve and show information about each repository.  
 
@@ -26,7 +26,7 @@ A default username (`octocat`) loads when the page opens, and users can type a d
 
 ---
 
-## 💻 Technologies Used
+## Technologies Used
 - **HTML5**
 - **CSS3**
 - **JavaScript (Fetch API)**
@@ -35,4 +35,8 @@ A default username (`octocat`) loads when the page opens, and users can type a d
 
 ---
 
-## 📂 File Structure
+## This project uses the public GitHub API:
+- https://api.github.com/users/hamza890890/repos
+- **The GitHub API limits unauthenticated requests to 60 per hour.
+If you exceed this limit, you may temporarily stop receiving responses until the hour resets.**
+
