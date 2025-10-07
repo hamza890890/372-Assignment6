@@ -2,10 +2,6 @@
 
 # GitHub Gallery
 
-**Author:** Hamza Ahmed  
-**Date:** October 7, 2025  
-**Course:** CSC 372-01 — Web Development  
-
 ---
 
 ## Description
