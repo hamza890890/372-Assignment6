@@ -1,11 +1,10 @@
-/*
-  Name: Hamza Ahmed
-  Date: 10.07.2025
-  CSC 372-01
-
-  Basic styling for the GitHub Gallery page.
+/**
+ * Name: Hamza Ahmed
+ * Date: 10.07.2025
+ * CSC 372-01
+ *
+ * This is the CSS file for my assignment 6
 */
-
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;

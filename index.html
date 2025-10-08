@@ -4,38 +4,44 @@
   Date: 10.07.2025
   CSC 372-01
 
-  This is the index.html file for the GitHub Gallery assignment.
-  It displays the latest 20 repositories for a given GitHub username
-  using the GitHub REST API.
+  This is the index.html page for my assignment 6.
+  It displays up to 20 of the latest repositories for a given GitHub username.
+  The page uses the GitHub REST API and JavaScript Fetch to retrieve data.
 -->
 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GitHub Gallery</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Font Awesome for GitHub icon -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-..."
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer">
+  
 </head>
+
 <body>
-  <h1><i class="fa-brands fa-github"></i> GitHub Gallery</h1>
+  <header>
+    <h1>GitHub Gallery</h1>
+    <p>This page displays a gallery of repositories for a GitHub username.</p>
+  </header>
 
-  <form id="search-form">
-    <input type="text" id="username" placeholder="Enter GitHub username">
-    <input type="submit" value="Search">
-  </form>
+  <main>
+    <!-- This is the form for entering GitHub username -->
+    <form id="search-form">
+      <input type="text" id="username" placeholder="Enter GitHub username">
+      <input type="submit" value="Search">
+    </form>
 
-  <p id="info-text">Displaying repositories for: <span id="display-user"></span></p>
+    
+    <p id="info-text">Displaying repositories for: <span id="display-user"></span></p>
 
-  <div id="repo-list"></div>
+    
+    <div id="repo-list">
+      
+    </div>
+  </main>
 
   <footer>
-    <p>Note: GitHub API allows 60 requests/hour without an API key.</p>
+    <p>Note: GitHub API allows 60 requests per hour without an API key.</p>
   </footer>
 
   <script src="script.js"></script>

@@ -3,13 +3,8 @@
  * Date: 10.07.2025
  * CSC 372-01
  *
- * This script fetches GitHub repositories for a user
- * and displays their details in a simple gallery layout.
- * Includes: name, description, dates, watchers, languages,
- * commits, and a link to the GitHub page.
- */
-
-// Default GitHub username
+ * This is the script file for my assignment 6
+*/
 const defaultUser = "hamza890890";
 
 const form = document.getElementById("search-form");
@@ -17,7 +12,7 @@ const repoList = document.getElementById("repo-list");
 const displayUser = document.getElementById("display-user");
 
 /**
- * Fetch the latest 20 repositories for a given user.
+ * This is to fetch the latest 20 repositories for a given user.
  * @param {string} username
  */
 function getRepos(username) {
@@ -38,13 +33,12 @@ function getRepos(username) {
     })
     .catch((error) => {
       console.error("Error:", error);
-      repoList.innerHTML =
-        "<p>Could not load repositories. Please check the username.</p>";
+      repoList.textContent = "Could not load repositories. Please check the username.";
     });
 }
 
 /**
- * Show each repository with details.
+ * This is used to show each repository with details using createElement().
  * @param {Array} repos
  * @param {string} username
  */
@@ -52,37 +46,68 @@ function showRepos(repos, username) {
   repoList.innerHTML = "";
 
   if (repos.length === 0) {
-    repoList.innerHTML = "<p>No repositories found for this user.</p>";
+    repoList.textContent = "No repositories found for this user.";
     return;
   }
 
   repos.forEach((repo) => {
-    // Create repo card
     let repoDiv = document.createElement("div");
     repoDiv.className = "repo";
 
-    // Fill in basic repo info
-    repoDiv.innerHTML = `
-      <h3>${repo.name}</h3>
-      <p>${repo.description ? repo.description : "No description provided."}</p>
-      <p><strong>Created:</strong> ${new Date(repo.created_at).toLocaleDateString()}</p>
-      <p><strong>Updated:</strong> ${new Date(repo.updated_at).toLocaleDateString()}</p>
-      <p><strong>Watchers:</strong> ${repo.watchers_count}</p>
-      <p id="languages-${repo.name}"><strong>Languages:</strong> loading...</p>
-      <p id="commits-${repo.name}"><strong>Commits:</strong> loading...</p>
-      <p><a href="${repo.html_url}" target="_blank">View on GitHub</a></p>
-    `;
+    // defining attributes here like name, description, date, etc    
+    let name = document.createElement("h3");
+    name.textContent = repo.name;
+    repoDiv.appendChild(name);
 
+
+    let desc = document.createElement("p");
+    desc.textContent = repo.description ? repo.description : "No description provided.";
+    repoDiv.appendChild(desc);
+
+
+    let created = document.createElement("p");
+    created.innerHTML = "<strong>Created:</strong> " + new Date(repo.created_at).toLocaleDateString();
+    repoDiv.appendChild(created);
+
+
+    let updated = document.createElement("p");
+    updated.innerHTML = "<strong>Updated:</strong> " + new Date(repo.updated_at).toLocaleDateString();
+    repoDiv.appendChild(updated);
+
+    let watchers = document.createElement("p");
+    watchers.innerHTML = "<strong>Watchers:</strong> " + repo.watchers_count;
+    repoDiv.appendChild(watchers);
+
+    let langP = document.createElement("p");
+    langP.id = "languages-" + repo.name;
+    langP.innerHTML = "<strong>Languages:</strong> loading...";
+    repoDiv.appendChild(langP);
+
+    let commitP = document.createElement("p");
+    commitP.id = "commits-" + repo.name;
+    commitP.innerHTML = "<strong>Commits:</strong> loading...";
+    repoDiv.appendChild(commitP);
+
+    // link it together
+    let linkP = document.createElement("p");
+    let link = document.createElement("a");
+    link.href = repo.html_url;
+    link.target = "_blank";
+    link.textContent = "View on GitHub";
+    linkP.appendChild(link);
+    repoDiv.appendChild(linkP);
+
+    // add to main container
     repoList.appendChild(repoDiv);
 
-    // Fetch languages and commits for this repo
+    // fetch extra details
     getLanguages(username, repo.name);
     getCommitCount(username, repo.name);
   });
 }
 
 /**
- * Second fetch: gets the list of programming languages for a repository.
+ * This is the second fetch because it gets the list of programming languages.
  * @param {string} username
  * @param {string} repoName
  */
@@ -112,7 +137,7 @@ function getLanguages(username, repoName) {
 }
 
 /**
- * Fetch estimated commit count (by counting commits pages).
+ * This is the the fetch estimated commit count (using the header link we defined above).
  * @param {string} username
  * @param {string} repoName
  */
@@ -132,7 +157,7 @@ function getCommitCount(username, repoName) {
           return match[1];
         }
       }
-      return 1; // if no pagination, assume 1 commit
+      return 1;
     })
     .then((count) => {
       document.getElementById("commits-" + repoName).innerHTML =
@@ -145,18 +170,18 @@ function getCommitCount(username, repoName) {
     });
 }
 
-/* ---------- Form event ---------- */
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   const username = document.getElementById("username").value.trim();
   if (username) {
     getRepos(username);
   } else {
-    repoList.innerHTML = "<p>Please enter a GitHub username.</p>";
+    repoList.textContent = "Please enter a GitHub username.";
   }
 });
 
-/* ---------- Default load ---------- */
+
 window.addEventListener("load", function () {
   getRepos(defaultUser);
   displayUser.textContent = defaultUser;
